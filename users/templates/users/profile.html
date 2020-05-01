@@ -1,0 +1,36 @@
+{% extends "happy/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="ui items">
+        <div class="item">
+            <div class="image">
+                <img class="ui medium circular image" src="{{ user.profile.image.url }}">
+            </div>
+            <div class="content">
+                <a class="header">{{ user.username }}</a>
+                <div class="description">
+                    <p>{{ user.email }}</p>
+                    <p>Age: {{user.profile.age}}</p>
+                    <p>Gender: {{user.profile.gender}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui item">
+        <div class="content">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                    <leged>Profile Info</leged>
+                    <div class="ui form">
+                        {{ u_form|crispy}}
+                        {{ p_form|crispy}}
+                    </div>
+                </fieldset>
+                <div>
+                    <button type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

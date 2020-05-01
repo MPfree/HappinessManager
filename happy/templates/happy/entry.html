@@ -1,0 +1,21 @@
+
+{% extends "happy/base.html" %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <leged>Blog Post</leged>
+                <div class="ui form">
+                    {{ form|crispy}}
+                </div>
+                
+            </fieldset>
+            <div>
+                <button class='ui button' type="submit">Record</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+

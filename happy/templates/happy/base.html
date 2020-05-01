@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <script src="{% static 'happy/jQuery.js' %}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+        {% if title %}
+            <title> HappinessManager - {{ title }}</title>
+        {% else %}
+            <title> HappinessManager</title>   
+        {% endif %} 
+    </head>
+    <body>
+        <div class="ui secondary pointing menu">
+            <a href="{% url 'happy-home' %}" class="active item">
+                Home
+            </a>
+            <a class="item">
+                Enter Data
+            </a>  
+            <a class="item">
+                Visualize
+            </a>  
+            {% if user.is_authenticated %}
+                <div class="right menu">
+                    <a href="{% url 'logout' %}" class="ui item">
+                    Log out
+                    </a>
+                </div>
+                <div class="right menu">
+                    <a href="{% url 'profile' %}" class="ui item">
+                    Profile
+                    </a>
+                </div>
+            {% else %}
+                <div class="right menu">
+                    <a href="{% url 'login' %}" class="ui item">
+                        Log in
+                    </a>
+                </div>
+                <div class="right menu">
+                    <a href="{% url 'register' %}" class="ui item">
+                    Register
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        <h1 class="ui header orange">Semantic Is Working</h1>
+        {% block content %}{% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,62 @@
+{
+	"sleep": {
+				"color" : "#33E3FF",
+				"conversion" : 0.416,
+				"max" : 0,
+				"name": "Sleep",
+				"unit": "hours"
+				},
+	"exercise":{
+					"color" : "#33FF90",
+					"conversion": 0.3,
+					"max": 3,
+					"name": "Exercise",
+					"unit": "hours"
+					},
+	"social":{
+				"color": "#FF3377",
+				"conversion": 2,
+				"max":5,
+				"name": "Social",
+				"unit": "hours"
+				},
+	"weather":{
+					"color": "#E6FF33",
+					"conversion": 1,
+					"max" :10,
+					"name": "Weather",
+					"unit": "out of 10"
+					},
+	"metime": {
+					"color": "#F633FF",
+					"conversion": 2.5,
+					"max": 4,
+					"name": "Alone Time",
+					"unit": "hours"
+					},
+	"socialmedia": {
+						"color": "#33F9FF",
+						"conversion": 2,
+						"max": 5,
+						"name": "Social Media",
+						"unit": "hours"
+						},
+	"happy":{
+				"color": "#FFC733",
+				"conversion": 1,
+				"max": 10,
+				"name": "Happiness",
+				"unit": "out of 10"
+				}
+}
+						
+				
+					
+	
+			
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+
+{% extends "happy/base.html" %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <leged>Join today</leged>
+                {{ form|crispy}}
+            </fieldset>
+            <div>
+                <button type="submit">Sign up</button>
+            </div>
+        </form>
+
+        <div>
+            <small>
+                Already have an account?  <a href="{% url 'login' %}">Sign in</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
+
