@@ -7,7 +7,7 @@ from django.urls import reverse
 class UserHappinessData(models.Model):
 
     author=models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField(default=timezone.now)
     sleep = models.FloatField("Sleep")
     exercise = models.FloatField("Exercise")
     social = models.FloatField("Social")

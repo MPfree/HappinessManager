@@ -4,23 +4,51 @@
         {% load static %}
         <script src="{% static 'happy/jQuery.js' %}"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
         {% if title %}
             <title> HappinessManager - {{ title }}</title>
         {% else %}
             <title> HappinessManager</title>   
         {% endif %} 
+        <style>
+            .buttonstyle {
+                background-color: lightcoral;
+            }
+            #indicatorbuttons > button {
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            
+
+            #indicatorbuttons {
+                box-sizing: border-box;
+                width: 50%;
+                height: 50%;
+                margin: auto;
+                background-color: indigo;
+            }
+
+        </style>
     </head>
     <body>
         <div class="ui secondary pointing menu">
             <a href="{% url 'happy-home' %}" class="active item">
                 Home
             </a>
-            <a class="item">
+            <a href="{% url 'happy-newentry' %}" class="item">
                 Enter Data
             </a>  
-            <a class="item">
+            <a href="{% url 'happy-visualize' %}" class="item">
                 Visualize
             </a>  
             {% if user.is_authenticated %}
@@ -47,7 +75,6 @@
                 </div>
             {% endif %}
         </div>
-        <h1 class="ui header orange">Semantic Is Working</h1>
         {% block content %}{% endblock %}
 
     </body>

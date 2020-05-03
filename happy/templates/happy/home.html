@@ -1,11 +1,16 @@
 {% extends "happy/base.html" %}
 {% block content %}
-    <h1>Home</h1>
+    <h1 class="ui header orange">Home</h1>
+    <!--Show any messages sent, for example if the user just registered-->
     {% if messages %}
         {% for message in messages %}
-            <div>
-                {{ message }}
+        <div class="ui message">
+            <i class="close icon"></i>
+            <div class="header">
+              Message
             </div>
+            <p>{{ message }}</p>
+          </div>
         {% endfor %}
     {% endif %}
     <a href="{% url 'happy-newentry' %}">
@@ -16,6 +21,7 @@
         <canvas id="myChart"></canvas>
     </div>
     {% load static %}
+    <!--Buttons that filter the data in the chart by date.-->
     <div class="ui buttons">
         <button onclick="updateData('alltime')" class="ui button">All time</button>
         <button onclick="updateData('yesterday')"  class="ui button">Yesterday</button>
@@ -23,12 +29,12 @@
         <button onclick="updateData('pastmonth')"  class="ui button">Past month</button>
         <button onclick="updateData('pastyear')"  class="ui button">Past year</button>
     </div>
+
+
     <script src="{% static 'happy/renderChart.js' %}"></script>
-    {{ indicator_names|json_script:"indicator_names" }}
+    <!--Initialize the chart and load yesterday's data-->
     <script>
-        var indicator_names = JSON.parse(document.getElementById('indicator_names').textContent);
-        renderChart(indicator_names)
-        updateData('yesterday')
+        initializeChart()
     </script>
 {% endblock content %}
     

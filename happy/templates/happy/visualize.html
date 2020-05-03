@@ -1,0 +1,16 @@
+{% extends 'happy/base.html' %}
+{% block content %}
+<div id="indicatorbuttons">
+
+</div>
+
+{% load static %}
+<script src="{% static 'happy/renderVisualize.js' %}"></script>
+
+<!--Run on page load-->
+<script>renderLineChart()</script>
+
+
+
+
+{% endblock content %}
