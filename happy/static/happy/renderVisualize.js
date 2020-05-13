@@ -1,31 +1,90 @@
 var indicatorData={}
+var indicatorNames = {}
+var indicatorPositions = {}
+let lineChartCanvas = document.getElementById('lineChart').getContext('2d');
+var lineChart = null
 
 function renderLineChart(){
-    addButtons()
+    addIndicatorButtons()
     setColors()
-    var dateData = {
-        data: [],
-        filteredData: [],
-        color: '',
-        state: false,
-        loaded: false
-    }
-    indicatorData["date"] = dateData
-    getIndicatorData("date")
     convertDates()
+    renderChart()
+}
+
+function renderChart(){
+    setTimeout(()=> {
+        lineChart = new Chart(lineChartCanvas, {
+        type:'line',
+        data:{
+            labels: indicatorData["date"].filteredData,
+            datasets:createDataSets(),
+        },
+        options:{
+            scales: {
+                yAxes:[{
+                    ticks:{
+                        beginAtZero: true,
+                        suggestedMax: 10
+                    }
+                }]
+            }
+        }
+
+    });
+    createIndicatorPositions()
+    updateChart("happy")
+    button = document.getElementById("happy")
+    button.style.backgroundColor = "white";
+    button.style.color = "black"
+    indicatorData["happy"].state = true
+    indicatorData["happy"].loaded = true
+    }, 250);
+    
+    
+}
+
+function createDataSets(){
+    let dataSets = []
+    for (const [key, value] of Object.entries(indicatorData)){
+        let dataSet = {
+            label: indicatorNames[key],
+            data:[],
+            showLine: false,
+            fill: false,
+            pointRadius: 3
+        }
+        dataSets.push(dataSet)
+    }
+    return dataSets
+}
+
+function createIndicatorPositions(){
+    let datasets = lineChart.data.datasets
+    var i;
+    for(i=0; i<datasets.length; i++){
+        let indicatorLabel = datasets[i].label
+        indicatorPositions[indicatorLabel]= i
+    }
 }
 
 function convertDates(){
-    let dates = indicatorData["date"]
-    for (index in dates){
-        let date = moment(dates[index], 'YYYYMMDD')
-        dates[index] = date
-    }
+    setTimeout(()=>{
+        let dates = indicatorData["date"].data
+        let formattedDates = indicatorData["date"].filteredData
+        for (index in dates){
+            let date = moment(dates[index])
+            let formattedDate = moment(dates[index]).format('MMMM DD, YYYY')
+            dates[index] = date
+            formattedDates[index] = formattedDate
+        }
+    }, 500)
+    
 }
 
-function addButtons(){
+function addIndicatorButtons(){
     $.get('/happy/api/getIndicatorNames', function(data){
         indicator_names = JSON.parse(data);
+        indicatorNames = indicator_names
         buttonParent = document.getElementById("indicatorbuttons")
         for (const [key, value] of Object.entries(indicator_names)){
             let button = document.createElement("button");
@@ -45,6 +104,15 @@ function addButtons(){
             indicatorData[key]= indicator
         }
 
+        var dateData = {
+            data: [],
+            filteredData: [],
+            color: '',
+            state: false,
+            loaded: false
+        }
+        indicatorData["date"] = dateData
+        getIndicatorData("date")
     })
 }
 
@@ -74,18 +142,42 @@ function buttonClick(event){
         button.style.color = "black"
         indicatorData[id].state = true
         let loaded = indicatorData[id].loaded
-
         if(!loaded){
             indicatorData[id].loaded = true
-            getIndicatorData(id)
+            updateChart(id)
         }
+        else{
+            let label = indicatorNames[id]
+            let indicatorPosition = indicatorPositions[label]
+            lineChart.data.datasets[indicatorPosition].showLine = true
+            lineChart.data.datasets[indicatorPosition].pointRadius = 3
+            lineChart.update()
+        }
+        
     }
     else{
         button.style.backgroundColor = indicatorData[id].color
         button.style.color = "white"
         indicatorData[id].state = false
+        let label = indicatorNames[id]
+        let indicatorPosition = indicatorPositions[label]
+        lineChart.data.datasets[indicatorPosition].showLine = false
+        lineChart.data.datasets[indicatorPosition].pointRadius = 0
+        lineChart.update()
 
     }
+    
+}
+
+function updateChart(name){
+    getIndicatorData(name)
+    let label = indicatorNames[name]
+    let indicatorPosition = indicatorPositions[label]
+    setTimeout(()=>{
+        lineChart.data.datasets[indicatorPosition].data = indicatorData[name].data
+        lineChart.data.datasets[indicatorPosition].showLine = true
+        lineChart.update()
+    }, 250)
     
 }
 
@@ -99,4 +191,61 @@ function getIndicatorData(name){
             indicatorData[name].data.push(value[name])
         }        
     })
+}
+
+function applyDateFilter(){
+    let range = getDateIndexes()
+    let lowerRangeIndex = range[0]
+    let upperRangeIndex = range[1]
+    let nonFilteredDate = indicatorData["date"].filteredData
+    let filteredDate = nonFilteredDate.slice(lowerRangeIndex, upperRangeIndex+1)
+    lineChart.data.labels = filteredDate
+    lineChart.update()
+    
+}
+
+function getDateIndexes(){
+    let startDateString = document.getElementById("start").value
+    let startDate = moment(startDateString)
+    let endDateString = document.getElementById("end").value
+    let endDate = moment(endDateString)
+    let dates = indicatorData["date"].data
+    let upperRangeIndex = dates.length - 1
+    let lowerRangeIndex = 0
+    let index;
+    for (index = dates.length - 1;index>0; index--){
+        let date = dates[index]
+        let diff = date.diff(endDate)
+        if(diff<=0){
+            upperRangeIndex = index
+            break
+        }
+    }
+    
+    for(index = 0; index<dates.length; index++){
+        let date = dates[index]
+        let diff = startDate.diff(date)
+        if(diff <=0){
+            lowerRangeIndex = index
+            break;
+        }
+    }
+
+    return [lowerRangeIndex, upperRangeIndex]
+
+}
+//not being used right now. Save it in case
+function updateChartWithDateFilteredData(){
+    for(const [key, value] of Object.entries(indicatorData)){
+        let label = indicatorNames[key]
+        let chartDataPosition = indicatorPositions[label]
+        lineChart.data.datasets[chartDataPosition].data = indicatorData[key].filteredData
+    }
+    let range = getDateIndexes()
+    let lowerRangeIndex = range[0]
+    let upperRangeIndex = range[1]
+    let nonFilteredDate = indicatorData["date"].filteredData
+    let filteredDate = nonFilteredDate.slice(lowerRangeIndex, upperRangeIndex)
+    lineChart.data.labels = filteredDate
+    lineChart.update()
 }
