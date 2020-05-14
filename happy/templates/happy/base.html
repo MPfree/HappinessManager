@@ -2,8 +2,12 @@
 <html>
     <head>
         {% load static %}
-        <script src="{% static 'happy/jQuery.js' %}"></script>
+        
+        <link rel="stylesheet" href="{% static 'happy/style.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+
+        <script src="{% static 'happy/jQuery.js' %}"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.0/moment.min.js"></script>
@@ -14,37 +18,6 @@
         {% else %}
             <title> HappinessManager</title>   
         {% endif %} 
-        <style>
-            .buttonstyle {
-                background-color: lightcoral;
-            }
-            #indicatorbuttons > button {
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-            
-
-            #indicatorbuttons {
-                box-sizing: border-box;
-                width: 25%;
-                height: 50%;
-                margin: auto;
-                background-color: indigo;
-                float:left
-            }
-            #lineChartDiv{
-                float:left;
-                width:50%;
-                margin:auto;
-            }
-
-        </style>
     </head>
     <body>
         <div class="ui secondary pointing menu">

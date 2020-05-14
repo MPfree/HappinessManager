@@ -1,3 +1,59 @@
+
+/* Tom styling */
+
+.indicatorButtons {
+  box-sizing: border-box;
+  width: 25%;
+  padding: 0.2em;
+  margin: 0.5em;
+}
+
+.indicatorButtons ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.indicatorButtons li{
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/*
+#indicatorbuttons > button {
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+#indicatorbuttons {
+  box-sizing: border-box;
+  width: 25%;
+  height: 50%;
+  margin: auto;
+  background-color: indigo;
+  float:left
+}
+#lineChartDiv{
+  float:left;
+  width:50%;
+  margin:auto;
+}
+*/
+
+/* Jason styling*/
+
 .page {
   font-family: "Raleway", sans-serif;
   font-size: 30px;

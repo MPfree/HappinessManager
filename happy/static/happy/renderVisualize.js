@@ -85,13 +85,15 @@ function addIndicatorButtons(){
     $.get('/happy/api/getIndicatorNames', function(data){
         indicator_names = JSON.parse(data);
         indicatorNames = indicator_names
-        buttonParent = document.getElementById("indicatorbuttons")
+        buttonParent = document.getElementById("buttonsList")
         for (const [key, value] of Object.entries(indicator_names)){
             let button = document.createElement("button");
             button.id=key
             button.addEventListener("click", buttonClick)
             button.innerHTML=value;
-            buttonParent.appendChild(button);
+            let listElement = document.createElement("li")
+            listElement.appendChild(button)
+            buttonParent.appendChild(listElement);
 
             var indicator={
                 data: [],

@@ -1,15 +1,25 @@
 {% extends 'happy/base.html' %}
 {% block content %}
-<div id="indicatorbuttons">
 
+<div class="indicatorButtons">
+  <ul id="buttonsList">
+    
+  </ul>
 </div>
+
+<!--
+<div id="indicatorbuttons">
+  
+</div>
+-->
+
 <div id="lineChartDiv" class="ui container">
     <canvas id="lineChart"></canvas>
 </div>
 
 <br><br><br><br><br>
 <h3>Range</h3>
-  <div class="ui form">
+  <div onchange="applyDateFilter()" class="ui form">
     <div class="two fields">
       <div class="field">
         <label>Start date</label>
@@ -35,10 +45,7 @@
   <br/>
   <p id="selectedDate"></p>
   <button onclick="getDateRange()">Get Date Range</button>
-  <script>
-      document.getElementById("start").addEventListener("change", applyDateFilter)
-      document.getElementById("end").addEventListener("change", applyDateFilter)
-  </script>
+
   <script>
       function getDateRange(){
           let dateIndexes = getDateIndexes()
