@@ -1,6 +1,6 @@
 .page {
   font-family: "Raleway", sans-serif;
-  font-size: 30px;
+  font-size: 2vw;
   color: #ffffff;
   text-align: center;
 }
@@ -15,35 +15,36 @@
 
 body {
   font-family: "Raleway", sans-serif, thin;
-  font-weight: 40px;
+  font-weight: 40vw;
   text-align: left;
-  font-size: 25px;
+  font-size: 3vw;
 }
 
 .banner {
   background-color: #fc9003;
   text-align: center;
+  height: 4vw;
 }
 
 .page_title {
   font-family: "Raleway", sans-serif, thin;
   text-align: left;
-  font-size: 50px;
-  color: #fc9003;
+  font-size: 3vw;
   font-weight: bold;
+  color: #fc9003;
 }
 
 .buttons {
   background-color: #fc9003;
   border: none;
   color: white;
-  padding: 15px 32px;
-  width: 190px;
+  padding: 1vw 1vw;
+  width: 13vw;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
-  border-radius: 6px;
+  font-size: 1.7vw;
+  border-radius: 1vw;
 }
 
 .button_section {
@@ -54,11 +55,11 @@ body {
   background-color: #fc9003;
   border: none;
   color: white;
-  padding: 15px 32px;
-  width: 600px;
+  padding: 1.5vw 1.5vw;
+  width: 40vw;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 50px;
-  border-radius: 6px;
+  font-size: 4vw;
+  border-radius: 1vw;
 }
