@@ -51,7 +51,8 @@ function createDataSets(){
             data:[],
             showLine: false,
             fill: false,
-            pointRadius: 3
+            pointRadius: 3,
+            borderColor: 'rgba(0,0,0,0.5)'
         }
         dataSets.push(dataSet)
     }
@@ -89,6 +90,7 @@ function addIndicatorButtons(){
         for (const [key, value] of Object.entries(indicator_names)){
             let button = document.createElement("button");
             button.id=key
+            button.className = "ui button listButton"
             button.addEventListener("click", buttonClick)
             button.innerHTML=value;
             let listElement = document.createElement("li")
@@ -177,6 +179,7 @@ function updateChart(name){
     let indicatorPosition = indicatorPositions[label]
     setTimeout(()=>{
         lineChart.data.datasets[indicatorPosition].data = indicatorData[name].data
+        lineChart.data.datasets[indicatorPosition].borderColor = indicatorData[name].color
         lineChart.data.datasets[indicatorPosition].showLine = true
         lineChart.update()
     }, 250)

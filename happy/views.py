@@ -30,6 +30,9 @@ def home(request):
 
     return render(request, 'happy/home.html', context)
 
+def sandbox(request):
+    return render(request, 'happy/sandbox.html')
+
 def visualize(request):
     return render(request, 'happy/visualize.html')
 
