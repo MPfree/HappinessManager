@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserHappinessDataSerializer
+from django.contrib import messages
 
 
 
@@ -54,6 +55,7 @@ class NewEntryView(LoginRequiredMixin, CreateView):
     #adds the current user to the form to make sure it matches the model fields
     def form_valid(self, form):
         form.instance.author = self.request.user
+        messages.success(self.request, f'Your entry has been saved!')
         return super().form_valid(form)
 
 class DateFilteredHappinessData(APIView):

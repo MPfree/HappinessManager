@@ -21,16 +21,41 @@ function renderChart(){
         },
         options:{
             scales: {
-                yAxes:[{
-                    ticks:{
-                        beginAtZero: true,
-                        suggestedMax: 10
+                yAxes:[
+                    {
+                        display:true,
+                        scaleLabel: {
+                            display:true,
+                            labelString: "Hours"
+                        },
+                        id: 'hours',
+                        type: 'linear',
+                        position: 'left',
+                        ticks:{
+                            beginAtZero: true,
+                            suggestedMax: 10
+                        }
+                    },
+                    {
+                        display:true,
+                        scaleLabel: {
+                            display:true,
+                            labelString: "Rating"
+                        },
+                        id: 'rating',
+                        type: 'linear',
+                        position: 'right',
+                        ticks:{
+                            min: 0,
+                            max: 10
+                        }
                     }
-                }]
+                ]
             }
         }
 
     });
+
     createIndicatorPositions()
     updateChart("happy")
     button = document.getElementById("happy")
@@ -46,13 +71,18 @@ function renderChart(){
 function createDataSets(){
     let dataSets = []
     for (const [key, value] of Object.entries(indicatorData)){
+        axisID = "hours"
+        if(key == "happy" || "weather"){
+            axisID = "rating"
+        }
         let dataSet = {
             label: indicatorNames[key],
             data:[],
             showLine: false,
             fill: false,
             pointRadius: 3,
-            borderColor: 'rgba(0,0,0,0.5)'
+            borderColor: 'rgba(0,0,0,0.5)',
+            yAxisID: axisID
         }
         dataSets.push(dataSet)
     }
