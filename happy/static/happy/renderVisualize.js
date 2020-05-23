@@ -81,7 +81,7 @@ function createDataSets(){
             showLine: false,
             fill: false,
             pointRadius: 3,
-            borderColor: 'rgba(0,0,0,0.5)',
+            borderColor: "rgb(247,247,235,0.5)",
             yAxisID: axisID
         }
         dataSets.push(dataSet)
