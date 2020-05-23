@@ -90,8 +90,18 @@ function updateData(period_name){
     
     /* change the chart data */
     function changeChartData(newData){
-        happyChart.data.datasets[0].data = newData
-        happyChart.update();
+        if(newData.length>0){
+            happyChart.data.datasets[0].data = newData
+            happyChart.update();
+        }
+        else{
+            var noDataMessage = document.createElement("h1")
+            var messageText = document.createTextNode("You have no data recorded for this time period")
+            noDataMessage.appendChild(messageText)
+            var chartArea = document.getElementById("chartArea")
+            chartArea.appendChild(noDataMessage)
+        }
+       
     }
     
 }
