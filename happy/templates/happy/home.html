@@ -4,8 +4,7 @@
     <!--Show any messages sent, for example if the user just registered-->
     {% if messages %}
         {% for message in messages %}
-        <div class="ui message">
-            <i class="close icon"></i>
+        <div class="ui positive message">
             <div class="header">
               Message
             </div>
@@ -32,9 +31,13 @@
 
 
     <script src="{% static 'happy/renderChart.js' %}"></script>
+    <script src="{% static 'happy/closeMessages.js' %}"></script>
     <!--Initialize the chart and load yesterday's data-->
     <script>
         initializeChart()
+    </script>
+    <script>
+        closeMessages()
     </script>
 {% endblock content %}
     
