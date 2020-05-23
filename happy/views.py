@@ -82,8 +82,13 @@ class DateFilteredHappinessData(APIView):
         #get the average of the UserHappinessData objects
         indicators = getAverageDict(days)
 
-        serializer = UserHappinessDataSerializer(indicators)
-        return Response(serializer.data)
+        if(len(indicators) > 0):
+            serializer = UserHappinessDataSerializer(indicators)
+            return Response(serializer.data)
+        else:
+            return JsonResponse({})
+
+        
 
 class SingeIndicatorData(APIView):
     def get(self, request, format=None):
