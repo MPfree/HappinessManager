@@ -5,6 +5,7 @@
     {% if messages %}
         {% for message in messages %}
         <div class="ui positive message">
+            <i class="close icon" onclick="closeNoDataMessage()"></i>
             <div class="header">
               Message
             </div>
@@ -12,22 +13,41 @@
           </div>
         {% endfor %}
     {% endif %}
+    <div id="noDataMessage" class="ui warning message">
+        <i class="close icon" onclick="closeNoDataMessage()"></i>
+        <h1 class="header">You have no recorded data for this date</h1>
+    </div>
+    
     <a href="{% url 'happy-newentry' %}">
         <button class="ui button large green">Enter Data</button>
     </a>
 
     <div id="chartArea" class="ui container">
+        <h1 id="chartTitle" class="ui header"></h1>
         <canvas id="myChart"></canvas>
     </div>
     {% load static %}
     <!--Buttons that filter the data in the chart by date.-->
-    <div class="ui buttons">
-        <button onclick="updateData('alltime')" class="ui button">All time</button>
-        <button onclick="updateData('yesterday')"  class="ui button">Yesterday</button>
-        <button onclick="updateData('pastweek')"  class="ui button">Past week</button>
-        <button onclick="updateData('pastmonth')"  class="ui button">Past month</button>
-        <button onclick="updateData('pastyear')"  class="ui button">Past year</button>
+    <div id="dateFilters"> 
+        <div class="ui buttons">
+            <button onclick="updateData('alltime')" class="ui button">All time</button>
+            <button onclick="updateData('yesterday')"  class="ui button">Yesterday</button>
+            <button onclick="updateData('pastweek')"  class="ui button">Past week</button>
+            <button onclick="updateData('pastmonth')"  class="ui button">Past month</button>
+            <button onclick="updateData('pastyear')"  class="ui button">Past year</button>
+        </div>
+
+        
+        <div class="ui calendar" id="calendarpicker">
+            <h3>Select Date</h3>
+            <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input id="date" type="text" placeholder="Date">
+            </div>
+            <button class="ui primary button" onclick="getDateData()">Show Data for This Date</button>
+        </div>
     </div>
+    
 
 
     <script src="{% static 'happy/renderChart.js' %}"></script>
@@ -38,6 +58,11 @@
     </script>
     <script>
         closeMessages()
+    </script>
+    <script>
+        $('#calendarpicker').calendar({
+            type: 'date'
+        });
     </script>
 {% endblock content %}
     

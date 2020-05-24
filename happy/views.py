@@ -15,7 +15,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserHappinessDataSerializer
 from django.contrib import messages
-
+import re
 
 
 # Create your views here.
@@ -64,23 +64,33 @@ class DateFilteredHappinessData(APIView):
         period = request.GET.get("period_name")
         todays_date = datetime.date.today()
         date_delta = None
-        #set the datedelta depending on the button the user clicked.
-        if period == 'alltime':
-            date_delta = relativedelta(years=1000)
-        if period == 'yesterday':
-            date_delta = datetime.timedelta(days=1)
-        if period == 'pastweek':
-            date_delta = datetime.timedelta(days=7)
-        if period == 'pastmonth':
-            date_delta = relativedelta(months=1)
-        if period == 'pastyear':
-            date_delta = relativedelta(years=1)
+        dateRangeDigits = re.findall("\d", period)
+        numberOfDigits = len(dateRangeDigits)
+        if numberOfDigits == 0: 
+            #set the datedelta depending on the button the user clicked.
+            if period == 'alltime':
+                date_delta = relativedelta(years=1000)
+            if period == 'yesterday':
+                date_delta = datetime.timedelta(days=1)
+            if period == 'pastweek':
+                date_delta = datetime.timedelta(days=7)
+            if period == 'pastmonth':
+                date_delta = relativedelta(months=1)
+            if period == 'pastyear':
+                date_delta = relativedelta(years=1)
+            
+            date_filter = (todays_date - date_delta).strftime('%Y-%m-%d')
+            #retrieve all UserHappinessData objects that fit the date filter
+            days = UserHappinessData.objects.filter(author=request.user, date__gte=date_filter).values("sleep", "exercise", "social", "metime", "weather", "socialmedia", "happy")
+            #get the average of the UserHappinessData objects
+            indicators = getAverageDict(days)
         
-        date_filter = (todays_date - date_delta).strftime('%Y-%m-%d')
-        #retrieve all UserHappinessData objects that fit the date filter
-        days = UserHappinessData.objects.filter(author=request.user, date__gte=date_filter).values("sleep", "exercise", "social", "metime", "weather", "socialmedia", "happy")
-        #get the average of the UserHappinessData objects
-        indicators = getAverageDict(days)
+        else:
+            indicatorQuerySet = UserHappinessData.objects.filter(author=request.user, date=period).values("sleep", "exercise", "social", "metime", "weather", "socialmedia", "happy")
+            if len(indicatorQuerySet) > 0:
+                indicators = indicatorQuerySet[0]
+            else:
+                indicators = {}
 
         if(len(indicators) > 0):
             serializer = UserHappinessDataSerializer(indicators)
