@@ -84,26 +84,42 @@ function updateData(period_name){
             indicator_array[position]= value
         }
         console.log(indicator_array.length)
-        changeChartData(indicator_array)
-
+        changeChart(indicator_array, period_name)
     })
-    
-    /* change the chart data */
-    function changeChartData(newData){
-        if(newData.length>0){
-            happyChart.data.datasets[0].data = newData
-            happyChart.update();
-        }
-        else{
-            var noDataMessage = document.createElement("h1")
-            var messageText = document.createTextNode("You have no data recorded for this time period")
-            noDataMessage.appendChild(messageText)
-            var chartArea = document.getElementById("chartArea")
-            chartArea.appendChild(noDataMessage)
-        }
-       
-    }
-    
 }
+    
+/* change the chart data */
+function changeChart(newData, period_name){
+    if(newData.length>0){
+        happyChart.data.datasets[0].data = newData
+        updateChartTitle(period_name)
+        happyChart.update();
+    }
+    else{
+        let noDataMessage = document.getElementById("noDataMessage")
+        noDataMessage.style.display = "block"
+    }
+   
+}
+
+function updateChartTitle(periodName){
+    let chartTitle = document.getElementById("chartTitle")
+    chartTitle.innerHTML = `Showing data for: ${periodName}`
+}
+
+function getDateData(){
+    let date = document.getElementById("date").value
+    let formattedDate = moment(date).format("YYYY-MM-DD")
+    console.log(formattedDate)
+    updateData(formattedDate)
+}
+
+function closeNoDataMessage(){
+    let noDataMessage = document.getElementById("noDataMessage")
+    noDataMessage.style.display = "none"
+}
+        
+    
+
     
     

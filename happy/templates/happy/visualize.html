@@ -8,50 +8,43 @@
     </ul>
   </div>
 
-  <!--
-  <div id="indicatorbuttons">
-    
-  </div>
-  -->
-
   <div id="lineChartDiv">
       <canvas id="lineChart"></canvas>
   </div>
+
+  <div id="dateRange">
+    <h3>Range</h3>
+      <div class="ui form">
+        <div class="two fields">
+          <div class="field">
+            <label>Start date</label>
+            <div class="ui calendar" id="rangestart">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" id="start" placeholder="Start">
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>End date</label>
+            <div class="ui calendar" id="rangeend">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" id="end" placeholder="End">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="ui primary button" onclick="getDateRange()">Apply Date Range</button>
+    </div>
+
 </div>
 
-<br><br><br><br><br>
-<h3>Range</h3>
-  <div onchange="applyDateFilter()" class="ui form">
-    <div class="two fields">
-      <div class="field">
-        <label>Start date</label>
-        <div class="ui calendar" id="rangestart">
-          <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="text" id="start" placeholder="Start">
-          </div>
-        </div>
-      </div>
-      <div class="field">
-        <label>End date</label>
-        <div class="ui calendar" id="rangeend">
-          <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="text" id="end" placeholder="End">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button class="ui button" onclick="this.innerHTML = 'penis'">Click Me Into The Sun Brother</button>
-  <br/>
-  <p id="selectedDate"></p>
-  <button onclick="getDateRange()">Get Date Range</button>
+
 
   <script>
       function getDateRange(){
-          let dateIndexes = getDateIndexes()
-          document.getElementById("selectedDate").innerHTML = dateIndexes
           applyDateFilter()
       }
   </script>
@@ -63,10 +56,6 @@
 <script>renderLineChart()</script>
 
 <!--Calendar Picker-->
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 <script>
     $('#rangestart').calendar({
         type: 'date',
