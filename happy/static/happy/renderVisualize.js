@@ -35,20 +35,6 @@ function renderChart(){
                             beginAtZero: true,
                             suggestedMax: 10
                         }
-                    },
-                    {
-                        display:true,
-                        scaleLabel: {
-                            display:true,
-                            labelString: "Rating"
-                        },
-                        id: 'rating',
-                        type: 'linear',
-                        position: 'right',
-                        ticks:{
-                            min: 0,
-                            max: 10
-                        }
                     }
                 ]
             }
@@ -71,10 +57,6 @@ function renderChart(){
 function createDataSets(){
     let dataSets = []
     for (const [key, value] of Object.entries(indicatorData)){
-        axisID = "hours"
-        if(key == "happy" || "weather"){
-            axisID = "rating"
-        }
         let dataSet = {
             label: indicatorNames[key],
             data:[],
@@ -82,7 +64,7 @@ function createDataSets(){
             fill: false,
             pointRadius: 3,
             borderColor: "rgb(247,247,235,0.5)",
-            yAxisID: axisID
+            yAxisID: "hours"
         }
         dataSets.push(dataSet)
     }
