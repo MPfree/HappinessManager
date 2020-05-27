@@ -3,18 +3,23 @@
 body{
   box-sizing: border-box;
 }
+
 #dateFilters {
   width: 80%;
   margin: 1em auto;
 }
+
+
 #dateFilters > div{
   width: 80%;
   margin: 1em auto;
 }
+
 #mainPanel {
   width: 100%;
   height: 70%;
 }
+
 .indicatorButtons {
   float: left;
   width: 25%;
