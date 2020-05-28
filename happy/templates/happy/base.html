@@ -8,7 +8,9 @@
 
         
         <script src="{% static 'happy/jQuery.js' %}"></script>
+        <script src="{% static 'happy/navigate.js' %}"></script>
 
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -24,9 +26,9 @@
             <title> HappinessManager</title>   
         {% endif %} 
     </head>
-    <body>
-        <div class="ui secondary pointing menu">
-            <a href="{% url 'happy-home' %}" class="active item">
+    <body onload="setCurrentPage()">
+        <div id="menu" class="ui menu">
+            <a href="{% url 'happy-home' %}" class="item">
                 Home
             </a>
             <a href="{% url 'happy-newentry' %}" class="item">
@@ -37,26 +39,23 @@
             </a>  
             {% if user.is_authenticated %}
                 <div class="right menu">
-                    <a href="{% url 'logout' %}" class="ui item">
+                    <a href="{% url 'logout' %}" class="item">
                     Log out
                     </a>
-                </div>
-                <div class="right menu">
-                    <a href="{% url 'profile' %}" class="ui item">
-                    Profile
+                    <a href="{% url 'profile' %}" class="item">
+                        Profile
                     </a>
                 </div>
             {% else %}
                 <div class="right menu">
-                    <a href="{% url 'login' %}" class="ui item">
+                    <a href="{% url 'login' %}" class="item">
                         Log in
                     </a>
-                </div>
-                <div class="right menu">
-                    <a href="{% url 'register' %}" class="ui item">
-                    Register
+                    <a href="{% url 'register' %}" class="item">
+                        Register
                     </a>
                 </div>
+                
             {% endif %}
         </div>
         {% block content %}{% endblock %}

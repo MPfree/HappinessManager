@@ -1,6 +1,5 @@
 {% extends "happy/base.html" %}
 {% block content %}
-    <h1 class="ui header orange">Home</h1>
     <!--Show any messages sent, for example if the user just registered-->
     {% if messages %}
         {% for message in messages %}
@@ -18,35 +17,54 @@
         <h1 class="header">You have no recorded data for this date</h1>
     </div>
     
-    <a href="{% url 'happy-newentry' %}">
-        <button class="ui button large green">Enter Data</button>
-    </a>
+
+    <div id="dateFilters"> 
+        
+        <ul id="filterButtons">
+            <li>
+                <button onclick="updateData('alltime')" class="ui massive orange basic button">All time</button>
+            </li>
+            <li>
+                <button onclick="updateData('yesterday')"  class="ui massive orange basic button">Yesterday</button>
+            </li>
+            <li>
+                <button onclick="updateData('pastweek')"  class="ui massive orange basic button">Past week</button>
+            </li>
+            <li>
+                <button onclick="updateData('pastmonth')"  class="ui massive orange basic button">Past month</button>
+            </li>
+            <li>
+                <button onclick="updateData('pastyear')"  class="ui massive orange basic button">Past year</button>
+            </li>
+        </ul>
+        
+        <div class="ui calendar" id="calendarpicker">
+            <div id="calendarcontent">
+                <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input id="date" type="text" placeholder="Date">
+                </div>
+                <button class="ui primary button" onclick="getDateData()">Show Data for This Date</button>
+            </div>
+        </div>
+    </div>
 
     <div id="chartArea" class="ui container">
         <h1 id="chartTitle" class="ui header"></h1>
         <canvas id="myChart"></canvas>
     </div>
+
+    <div id="enterdata">
+        <a href="{% url 'happy-newentry' %}">
+            <button class="ui button massive orange">Enter Data</button>
+        </a>
+    </div>
     {% load static %}
     <!--Buttons that filter the data in the chart by date.-->
-    <div id="dateFilters"> 
-        <div class="ui buttons">
-            <button onclick="updateData('alltime')" class="ui button">All time</button>
-            <button onclick="updateData('yesterday')"  class="ui button">Yesterday</button>
-            <button onclick="updateData('pastweek')"  class="ui button">Past week</button>
-            <button onclick="updateData('pastmonth')"  class="ui button">Past month</button>
-            <button onclick="updateData('pastyear')"  class="ui button">Past year</button>
-        </div>
 
         
-        <div class="ui calendar" id="calendarpicker">
-            <h3>Select Date</h3>
-            <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input id="date" type="text" placeholder="Date">
-            </div>
-            <button class="ui primary button" onclick="getDateData()">Show Data for This Date</button>
-        </div>
-    </div>
+        
+    
     
 
 

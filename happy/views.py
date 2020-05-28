@@ -31,6 +31,9 @@ def home(request):
 
     return render(request, 'happy/home.html', context)
 
+def index(request):
+    return render(request, 'happy/index.html')
+
 def sandbox(request):
     return render(request, 'happy/sandbox.html')
 

@@ -103,6 +103,12 @@ function changeChart(newData, period_name){
 }
 
 function updateChartTitle(periodName){
+    if (periodName.includes('past')){
+        periodName = periodName.replace('past', 'past ')
+    }
+    if (periodName.includes('all')){
+        periodName = periodName.replace('all', 'all ')
+    }
     let chartTitle = document.getElementById("chartTitle")
     chartTitle.innerHTML = `Showing data for: ${periodName}`
 }
