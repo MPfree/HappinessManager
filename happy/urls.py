@@ -10,6 +10,7 @@ urlpatterns = [
     path('visualize/', views.visualize, name='happy-visualize'),
     path('api/singleindicatordata', views.SingeIndicatorData.as_view(), name = 'happy-singleindicatordata'),
     path('sandbox', views.sandbox, name='happy-sandbox'),
+    path('index', views.index, name='happy-index')
 
 
 ]
