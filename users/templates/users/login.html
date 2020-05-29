@@ -1,22 +1,36 @@
 {% extends "happy/base.html" %}
+{% block style %}
+    {% load static %}
+            
+            <link rel="stylesheet" href="{% static 'users/form.css' %}">
+            <link rel="stylesheet" href="{% static 'users/login.css' %}">
+            <script src="{% static 'users/applyStaticToCrispyForms.js' %}"></script>
+
+{% endblock style %}
 {% block content %}
     {% load crispy_forms_tags %}
-    <div>
+    <img id="logo" class="ui small image" src="/static/logo.jpg">
+    <div id="loginPanel" class="mainPanel">
         <form method="POST">
             {% csrf_token %}
-            <fieldset>
-                <leged>Log in</leged>
-                {{ form|crispy}}
+            <leged class="legend">Log in</leged>
+            <fieldset id="informationEntry" >
+                
+                <div class="ui form">
+                    {{ form|crispy}}
+                </div>
             </fieldset>
             <div>
-                <button type="submit">Log in</button>
+                <button class="ui large orange button" id="loginButton" type="submit">Log in</button>
             </div>
         </form>
 
-        <div>
-            <small>
+        <div id="accountLink">
+            <p>
                 Need an account?  <a href="{% url 'register' %}">Sign up</a>
-            </small>
+            </p>
         </div>
     </div>
+
+    
 {% endblock content %}

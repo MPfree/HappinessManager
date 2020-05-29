@@ -87,3 +87,9 @@ body{
   background-color: rgb(248, 161, 74);
 }
 
+#menuLogo {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+}

@@ -1,0 +1,17 @@
+
+.mainPanel {
+    padding: 4px;
+    width: 50%;
+    margin: auto;
+}
+
+
+.loginButton {
+    margin-top: 10px;
+}
+
+.legend {
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 5px;
+}

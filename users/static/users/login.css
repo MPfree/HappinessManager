@@ -1,0 +1,17 @@
+#loginPanel{
+    position: fixed;
+    top: 40%;
+    left: 25%;
+}
+
+#accountLink {
+    margin-top: 10px;
+}
+
+#logo {
+    position: fixed;
+    top: 20%;
+    left: 45%;
+}
+
+
