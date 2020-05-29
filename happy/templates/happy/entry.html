@@ -1,19 +1,28 @@
 
 {% extends "happy/base.html" %}
+
+{% block style %}
+    {% load static %}
+            
+            <link rel="stylesheet" href="{% static 'happy/entry.css' %}">
+            <link rel="stylesheet" href="{% static 'users/form.css' %}">
+
+{% endblock style %}
+
 {% block content %}
     {% load crispy_forms_tags %}
-    <div>
+    <div id="entryPanel" class="mainPanel">
         <form method="POST">
             {% csrf_token %}
+            <leged id="legend">Happiness Data Entry</leged>
             <fieldset>
-                <leged>Blog Post</leged>
                 <div class="ui form">
                     {{ form|crispy}}
                 </div>
                 
             </fieldset>
             <div>
-                <button class='ui button' type="submit">Record</button>
+                <button id="submit" class='ui large orange button' type="submit">Record</button>
             </div>
         </form>
     </div>

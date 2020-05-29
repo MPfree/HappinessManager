@@ -16,10 +16,12 @@ from rest_framework import status
 from .serializers import UserHappinessDataSerializer
 from django.contrib import messages
 import re
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
+@login_required
 def home(request):
     #get verbose names and remove unwanted fields. Send the dictionary to the home template
     name_verbosename = getUserHappinessDataVerboseNamesDict()
@@ -37,6 +39,7 @@ def index(request):
 def sandbox(request):
     return render(request, 'happy/sandbox.html')
 
+@login_required
 def visualize(request):
     return render(request, 'happy/visualize.html')
 
