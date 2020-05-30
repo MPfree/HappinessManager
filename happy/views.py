@@ -17,6 +17,7 @@ from .serializers import UserHappinessDataSerializer
 from django.contrib import messages
 import re
 from django.contrib.auth.decorators import login_required
+from .testing import feature_ranking
 
 
 # Create your views here.
@@ -111,4 +112,18 @@ class SingeIndicatorData(APIView):
         indicator_name = [request.GET.get("indicator_name")]
         indicator_data = list(UserHappinessData.objects.filter(author=request.user).values(*indicator_name))
         return JsonResponse({"indicator_data": indicator_data}, safe=False)
+
+class getIndicatorWeights(APIView):
+    def get(self, request, format=None):
+        data = UserHappinessData.objects.filter(author=request.user).values("sleep", "exercise", "social", "metime", "weather", "socialmedia", "happy")
+        preppedData = {"sleep":[], "exercise": [], "social": [], "metime": [], "weather": [], "socialmedia": [], "happy": []}
+        for day in data:
+            for indicator in day:
+                preppedData[indicator].append(day[indicator])
+
+        indicators, weights = feature_ranking(preppedData)
+        indicator_weights = {"indicators": indicators, "weights": weights}
+        return JsonResponse(indicator_weights, safe=False)
+
+
 
