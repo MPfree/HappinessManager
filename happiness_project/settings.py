@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from botocore.client import Config
-import boto3
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z!0+hph9r*yv7rj4v4!4+fc7$c0v-&*8oh9%22*n7()s#nv8#l'
+SECRET_KEY = 'ea456cbffbb053ee7699cf85e435a9bef882ecb435b22175'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -164,3 +163,4 @@ AWS_DEFAULT_ACL=None
 
 DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
 
+django_heroku.settings(locals())
