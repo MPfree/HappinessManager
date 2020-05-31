@@ -33,9 +33,8 @@ def home(request):
     context = {"indicator_names": name_verbosename}
 
     return render(request, 'happy/home.html', context)
-
-def index(request):
-    return render(request, 'happy/index.html')
+def about(request):
+    return render(request, 'happy/about.html')
 
 def sandbox(request):
     return render(request, 'happy/sandbox.html')
