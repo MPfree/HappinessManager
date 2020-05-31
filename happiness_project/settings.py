@@ -27,7 +27,7 @@ SECRET_KEY = 'z!0+hph9r*yv7rj4v4!4+fc7$c0v-&*8oh9%22*n7()s#nv8#l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['happinessmanager.herokuapp.com']
 
 
 # Application definition
@@ -155,9 +155,9 @@ EMAIL_HOST_PASSWORD = 'uclqoiiwvgwvxfil'
 AWS_ACCESS_KEY_ID='AKIA4PMFIN2MMQK57ZGU'
 AWS_SECRET_ACCESS_KEY='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'
 AWS_STORAGE_BUCKET_NAME='happiness-manager'
-AWS_S3_REGION_NAME = 'us-east-2'
-AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_S3_ADDRESSING_STYLE = "virtual"
+AWS_S3_REGION_NAME='us-east-2'
+AWS_S3_SIGNATURE_VERSION='s3v4'
+AWS_S3_ADDRESSING_STYLE="virtual"
 
 AWS_S3_FILE_OVERWRITE=False
 AWS_DEFAULT_ACL=None
