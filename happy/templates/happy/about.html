@@ -1,0 +1,36 @@
+{% extends 'happy/base.html' %}
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'happy/about.css'%}">
+
+{% endblock style %}
+{% block content %}
+    <div class="about ui container">
+        <h1 class="ui orange header">What Makes You Happy? </h1>
+        <p>This may feel like a straightforward question but it can be more elusive that we'd think. 
+            We have countless experiences every day and not a lot of time to reflect on them, and this can make it hard to see what really makes us happy. 
+            Happiness Manager can help us see more clearly. </p>
+        <h1 class="ui orange header">How the App Works</h1>
+        <p>At the end of every day before sleep you enter data about how your day went: how much you slept, exercised, socialized with friends, etc.
+            Each day you also record how happy you felt you were throughout the day. Of course, happiness is quite an ambigious concept. 
+            What we're trying to capture here is your moment to moment experienced happiness. Record what you think your average experienced happiness was throughout the day on a scale of 1-10.
+            As soon as you fill out data you can start visualizing it. On the home page you can quickly see your happiness data averaged over different time periods. On the visualize page you have
+            much more control. You can interact with the line graph by plotting different happiness indicators against each other and choosing whatever time range you want. Also on the visualize page
+            there is a pie chart that displays how much each happiness indicator contribtues to your happiness. This is accomplished through using machine learning algorithms. The more data you record, the 
+            better the machine learning algorithm will understand what makes you happy.
+        </p>
+        <h1 class="ui orange header">Why This Works</h1>
+        <p>Happiness is a subjective experience, but that doesn't mean you can't take a data driven approach to it. Modern psychology tells us that humans are suscpetible to many biases
+            and these biases prevent us from seeing ourselves clearly. However, as the philosopher Pengz once said, "Men lie, women lie, but the numbers don't". By recording data regarding your
+            happiness you can make informed decisions about how to structure your life to maximize happiness. Humans are extremely adept at spotting visual patterns, so by looking at the visualizations
+            of your happiness data, chances are you'll be able to uncover some truths about your happiness you may have never acknowledged before. However, what if there is no clear pattern and there's 
+            just too much data for you to process? For that we employ machine learing algorithms to spot the patterns for us. The more data you record about yourself, the better the algorithms will be able to 
+            tell you what makes you tick. While we are emotional creatures and have preconceptions about what makes us happy, the algorithms don't. They have the power to objectively tell you what makes you happy - 
+            it's your choice then what to do with that information.
+        </p>
+    </div>
+    
+
+
+
+{% endblock content %}

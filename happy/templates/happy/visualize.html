@@ -41,6 +41,11 @@
 
 </div>
 
+<div class="container">
+  <p style="text-align: center;">Contribution of each indicator to your happiness</p>
+  <canvas id="myPieChart"></canvas>
+</div>
+
 
 
   <script>
@@ -51,9 +56,12 @@
 
 {% load static %}
 <script src="{% static 'happy/renderVisualize.js' %}"></script>
+<script src="{% static 'happy/pieChart.js' %}"></script>
 
 <!--Run on page load-->
 <script>renderLineChart()</script>
+<script>executePieChart()</script>
+
 
 <!--Calendar Picker-->
 <script>
