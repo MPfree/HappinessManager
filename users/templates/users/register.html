@@ -10,8 +10,10 @@
 {% endblock style %}
 {% block content %}
     {% load crispy_forms_tags %}
+    
+    <img id="logo" src="/static/logo.jpg">
+    
     <div id="registrationPanel" class="mainPanel">
-        <img id="logo" class="ui tiny image" src="/static/logo.jpg">
         <form method="POST">
             {% csrf_token %}
             <leged class="legend">Join today</leged>

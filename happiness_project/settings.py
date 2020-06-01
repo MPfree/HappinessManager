@@ -26,7 +26,7 @@ SECRET_KEY = 'ea456cbffbb053ee7699cf85e435a9bef882ecb435b22175'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['happinessmanager.herokuapp.com']
+ALLOWED_HOSTS = ['happinessmanager.herokuapp.com','']
 
 
 # Application definition
