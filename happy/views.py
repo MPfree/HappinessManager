@@ -110,6 +110,15 @@ class SingeIndicatorData(APIView):
     def get(self, request, format=None):
         indicator_name = [request.GET.get("indicator_name")]
         indicator_data = list(UserHappinessData.objects.filter(author=request.user).values(*indicator_name))
+        if(indicator_name[0] != 'date'):
+            field = UserHappinessData._meta.get_field(indicator_name[0])
+            print(field)
+            max = ((field.validators)[0]).limit_value
+            min = ((field.validators)[1]).limit_value
+            range = max-min
+            for obj in indicator_data:
+                obj[indicator_name[0]] = (obj[indicator_name[0]] / range) * 10
+        print(indicator_data)
         return JsonResponse({"indicator_data": indicator_data}, safe=False)
 
 class getIndicatorWeights(APIView):
