@@ -4,16 +4,17 @@ var indicatorPositions = {}
 let lineChartCanvas = document.getElementById('lineChart').getContext('2d');
 var lineChart = null
 
-function renderLineChart(){
-    addIndicatorButtons()
+async function renderLineChart(){
+    await addIndicatorButtons()
+    await getIndicatorData("date")
     setColors()
     convertDates()
     renderChart()
 }
 
 function renderChart(){
-    setTimeout(()=> {
-        lineChart = new Chart(lineChartCanvas, {
+    
+    lineChart = new Chart(lineChartCanvas, {
         type:'line',
         data:{
             labels: indicatorData["date"].filteredData,
@@ -49,9 +50,6 @@ function renderChart(){
     button.style.color = "black"
     indicatorData["happy"].state = true
     indicatorData["happy"].loaded = true
-    }, 250);
-    
-    
 }
 
 function createDataSets(){
@@ -81,55 +79,64 @@ function createIndicatorPositions(){
 }
 
 function convertDates(){
-    setTimeout(()=>{
-        let dates = indicatorData["date"].data
-        let formattedDates = indicatorData["date"].filteredData
-        for (index in dates){
-            let date = moment(dates[index])
-            let formattedDate = moment(dates[index]).format('MMMM DD, YYYY')
-            dates[index] = date
-            formattedDates[index] = formattedDate
-        }
-    }, 500)
+    let dates = indicatorData["date"].data
+    let formattedDates = indicatorData["date"].filteredData
+    for (index in dates){
+        let date = moment(dates[index])
+        let formattedDate = moment(dates[index]).format('MMMM DD, YYYY')
+        dates[index] = date
+        formattedDates[index] = formattedDate
+    }
+    
     
 }
 
 function addIndicatorButtons(){
-    $.get('/happy/api/getIndicatorNames', function(data){
-        indicator_names = JSON.parse(data);
-        indicatorNames = indicator_names
-        buttonParent = document.getElementById("buttonsList")
-        for (const [key, value] of Object.entries(indicator_names)){
-            let button = document.createElement("button");
-            button.id=key
-            button.className = "ui button listButton"
-            button.addEventListener("click", buttonClick)
-            button.innerHTML=value;
-            let listElement = document.createElement("li")
-            listElement.appendChild(button)
-            buttonParent.appendChild(listElement);
-
-            var indicator={
+    return new Promise((resolve, reject) => {
+        $.get('/happy/api/getIndicatorNames', function(data){
+            if(data){
+                indicator_names = JSON.parse(data);
+            indicatorNames = indicator_names
+            buttonParent = document.getElementById("buttonsList")
+            for (const [key, value] of Object.entries(indicator_names)){
+                let button = document.createElement("button");
+                button.id=key
+                button.className = "ui button listButton"
+                button.addEventListener("click", buttonClick)
+                button.innerHTML=value;
+                let listElement = document.createElement("li")
+                listElement.appendChild(button)
+                buttonParent.appendChild(listElement);
+    
+                var indicator={
+                    data: [],
+                    filteredData: [],
+                    color: '',
+                    state: false,
+                    loaded: false
+                }
+    
+                indicatorData[key]= indicator
+            }
+    
+            var dateData = {
                 data: [],
                 filteredData: [],
                 color: '',
                 state: false,
                 loaded: false
             }
+            indicatorData["date"] = dateData
+            resolve();
 
-            indicatorData[key]= indicator
-        }
-
-        var dateData = {
-            data: [],
-            filteredData: [],
-            color: '',
-            state: false,
-            loaded: false
-        }
-        indicatorData["date"] = dateData
-        getIndicatorData("date")
+            }
+            else{
+                reject();
+            }
+            
+        })
     })
+    
 }
 
 function setColors(labels){
@@ -185,8 +192,8 @@ function buttonClick(event){
     
 }
 
-function updateChart(name){
-    getIndicatorData(name)
+async function updateChart(name){
+    await getIndicatorData(name);
     let label = indicatorNames[name]
     let indicatorPosition = indicatorPositions[label]
     setTimeout(()=>{
@@ -199,15 +206,25 @@ function updateChart(name){
 }
 
 function getIndicatorData(name){
-    var param = {indicator_name: name}
-    $.get("/happy/api/singleindicatordata", param, function setIndicatorData(data){
-        console.log(data)
-        console.log("horse")
+    return new Promise((resolve, reject) => {
+        var param = {indicator_name: name}
+        $.get("/happy/api/singleindicatordata", param, function setIndicatorData(data){
+            if(data){
+                console.log(data)
+                console.log("horse")
 
-        for (const [key, value] of Object.entries(data["indicator_data"])){
-            indicatorData[name].data.push(value[name])
-        }        
+                for (const [key, value] of Object.entries(data["indicator_data"])){
+                    indicatorData[name].data.push(value[name])
+                }   
+                resolve();
+            }
+            else{
+                reject();
+            }
+                 
+        })
     })
+    
 }
 
 function applyDateFilter(){
