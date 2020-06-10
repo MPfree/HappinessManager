@@ -57,7 +57,7 @@ class NewEntryView(LoginRequiredMixin, CreateView):
     #It displays only the fields specified below
     template_name = 'happy/entry.html'
     model = UserHappinessData
-    fields = ['sleep', 'exercise', 'social', 'weather', 'metime', 'socialmedia', 'happy']
+    fields = ['sleep', 'exercise', 'social', 'weather', 'metime', 'socialmedia', 'happy', 'journal']
     #adds the current user to the form to make sure it matches the model fields
     def form_valid(self, form):
         form.instance.author = self.request.user
