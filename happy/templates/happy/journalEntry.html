@@ -1,0 +1,22 @@
+{% extends 'happy/base.html' %}
+{% block style %}
+{% load static %}
+            
+            <link rel="stylesheet" href="{% static 'happy/journal.css' %}">
+{% endblock style %}
+{% block content %}
+
+<h1 class="ui header"> Journals </h1>
+
+{% for day in happinessData %}
+    
+<div class="dailyEntry">
+    <p>Happiness: {{day.happy}}</p>
+    <p>Date: {{day.date}}</p>
+    <p>Journal Entry: {{day.journal}}</p>
+</div>   
+    
+{% endfor %}
+
+
+{% endblock content %}

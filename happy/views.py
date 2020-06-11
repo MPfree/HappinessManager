@@ -43,6 +43,12 @@ def sandbox(request):
 def visualize(request):
     return render(request, 'happy/visualize.html')
 
+def journal(request):
+    happinessData = list(UserHappinessData.objects.filter(author=request.user).values())
+    context = {"happinessData" : happinessData}
+    return render(request, 'happy/journalEntry.html', context)
+
+
 def getIndicatorNames(request):
     name_verbosename = getUserHappinessDataVerboseNamesDict()
     name_verbosename.pop('id')

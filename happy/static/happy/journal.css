@@ -1,0 +1,7 @@
+.dailyEntry {
+    display: inline-block;
+    margin: 10px;
+    border-style: groove;
+    border-width: 2px;
+    border-color: darkmagenta;
+}
