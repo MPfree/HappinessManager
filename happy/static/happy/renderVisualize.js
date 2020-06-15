@@ -27,7 +27,7 @@ function renderChart(){
                         display:true,
                         scaleLabel: {
                             display:true,
-                            labelString: "Hours"
+                            labelString: "Rating"
                         },
                         id: 'hours',
                         type: 'linear',
@@ -211,7 +211,6 @@ function getIndicatorData(name){
         $.get("/happy/api/singleindicatordata", param, function setIndicatorData(data){
             if(data){
                 console.log(data)
-                console.log("horse")
 
                 for (const [key, value] of Object.entries(data["indicator_data"])){
                     indicatorData[name].data.push(value[name])
