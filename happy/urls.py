@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/getIndicatorNames', views.getIndicatorNames, name = 'happy-indicatornames'),
     path('api/getIndicatorWeights', views.getIndicatorWeights.as_view(), name = 'happy-indicatorweights'),
     path('visualize/', views.visualize, name='happy-visualize'),
+    path('journal/', views.journal, name='happy-journal'),
     path('api/singleindicatordata', views.SingeIndicatorData.as_view(), name = 'happy-singleindicatordata'),
     path('sandbox', views.sandbox, name='happy-sandbox'),
     path('about', views.about, name = 'happy-about')

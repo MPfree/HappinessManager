@@ -38,6 +38,8 @@ class UserHappinessData(models.Model):
         MinValueValidator(0)
     ])
 
+    journal = models.TextField("Journal")
+
     def __str__(self):
         user = (self.author).username
         return user + ' ' + str(self.happy)
